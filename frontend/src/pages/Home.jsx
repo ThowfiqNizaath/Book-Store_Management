@@ -16,7 +16,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:3000/books")
+      .get("https://book-store-management-zig8.vercel.app/books")
       .then((Response) => {
         setBooks(Response.data.books);
         setLoading(false);

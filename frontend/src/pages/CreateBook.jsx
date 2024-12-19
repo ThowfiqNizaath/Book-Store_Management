@@ -17,7 +17,10 @@ const CreateBook = () => {
         author: author,
         publishedYear: publishedYear
       }
-      await axios.post("http://localhost:3000/books",data)
+      await axios.post(
+        "https://book-store-management-zig8.vercel.app/books",
+        data
+      );
       enqueueSnackbar('Successfully created book!', {
         variant: 'success'
       })

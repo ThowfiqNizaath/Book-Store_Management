@@ -9,10 +9,12 @@ const ShowBook = () => {
   const { id } = useParams();
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:3000/books/${id}`).then((res) => {
-      setBook(res.data.book);
-      setLoading(false);
-    });
+    axios
+      .get(`https://book-store-management-zig8.vercel.app/books/${id}`)
+      .then((res) => {
+        setBook(res.data.book);
+        setLoading(false);
+      });
   }, []);
   return (
     <div className="px-4 py-2 sm:p-2">

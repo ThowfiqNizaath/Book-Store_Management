@@ -44,13 +44,14 @@ const EditBook = () => {
         author: author,
         publishedYear: publishedYear
       }
-      axios.put(`http://localhost:3000/books/${id}`,data)
-      .then(res => {
-         enqueueSnackbar("Successfully created book!", {
-           variant: "success",
-         });
-        navigate('/')
-    })
+      axios
+        .put(`https://book-store-management-zig8.vercel.app/books/${id}`, data)
+        .then((res) => {
+          enqueueSnackbar("Successfully created book!", {
+            variant: "success",
+          });
+          navigate("/");
+        });
     }catch(err){
          enqueueSnackbar("Unable to fetch API", {
            variant: "error",

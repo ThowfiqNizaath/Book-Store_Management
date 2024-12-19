@@ -9,18 +9,20 @@ const DeleteBook = () => {
   const navigate = useNavigate()
   const {enqueueSnackbar} = useSnackbar()
   const handleDeletBook = async() => {
-     axios.delete(`http://localhost:3000/books/${id}`)
-     .then(res => {
-        enqueueSnackbar('Successfully Deleted!',{
-          variant: 'success',
-        })
-        navigate('/')
-     }).catch(err => {
-      enqueueSnackbar('Unable to delete book', {
-        variant: 'error',
-      })
-      console.log(err)
-     })
+     axios
+       .delete(`https://book-store-management-zig8.vercel.app/books/${id}`)
+       .then((res) => {
+         enqueueSnackbar("Successfully Deleted!", {
+           variant: "success",
+         });
+         navigate("/");
+       })
+       .catch((err) => {
+         enqueueSnackbar("Unable to delete book", {
+           variant: "error",
+         });
+         console.log(err);
+       });
   }
  return(
   <div className="px-2 py-2">
