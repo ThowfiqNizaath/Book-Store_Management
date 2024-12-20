@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import Backbutton from '../components/Backbutton'
 import { useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
+import { appContext } from '../Context/context'
 const CreateBook = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [publishedYear, setPublishedYear] = useState(0)
+  const {SERVER_URL} = useContext(appContext)
   const {enqueueSnackbar} = useSnackbar()
   const navigate = useNavigate()
   const handleSaveBook = async() => {
@@ -17,10 +19,7 @@ const CreateBook = () => {
         author: author,
         publishedYear: publishedYear
       }
-      await axios.post(
-        "https://book-store-management-zig8.vercel.app/books",
-        data
-      );
+      await axios.post(`${SERVER_URL}/books`, data);
       enqueueSnackbar('Successfully created book!', {
         variant: 'success'
       })

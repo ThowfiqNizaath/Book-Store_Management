@@ -8,15 +8,15 @@ import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import TableView from "../components/TableView";
 import CardView from "../components/CardView";
 import { appContext } from "../Context/context";
-
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-  const {view, toggleView} = useContext(appContext)
+  const {view, toggleView, SERVER_URL} = useContext(appContext)
+  
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://book-store-management-zig8.vercel.app/books")
+      .get(`${SERVER_URL}/books`)
       .then((Response) => {
         setBooks(Response.data.books);
         setLoading(false);

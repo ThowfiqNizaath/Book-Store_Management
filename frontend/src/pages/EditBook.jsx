@@ -1,24 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Backbutton from "../components/Backbutton";
 import { useNavigate, useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { useSnackbar } from "notistack";
+import { appContext } from "../Context/context";
 const EditBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [loading, setLoading] = useState(false)
   const [publishedYear, setPublishedYear] = useState(0);
+  const {SERVER_URL} = useContext(appContext)
   const navigate = useNavigate();
   const {id} = useParams()
   const {enqueueSnackbar} = useSnackbar()
   useEffect(() => {
     setLoading(true);
     const fetchBook = async () => {
+      console.log(`${SERVER_URL}/books/${id}`);
       try {
         await axios
-          .get(`http://localhost:3000/books/${id}`)
+          .get(`${SERVER_URL}/books/${id}`)
           .then((response) => {
             const { title, author, publishedYear } = response.data.book;
             setTitle(title);
@@ -27,7 +30,7 @@ const EditBook = () => {
           });
           setLoading(false)
       } catch (err) {
-        enqueueSnackbar("Please provide all details", {
+          enqueueSnackbar("Fetching Error", {
           variant: "error",
         });
       }
@@ -44,14 +47,12 @@ const EditBook = () => {
         author: author,
         publishedYear: publishedYear
       }
-      axios
-        .put(`https://book-store-management-zig8.vercel.app/books/${id}`, data)
-        .then((res) => {
-          enqueueSnackbar("Successfully created book!", {
-            variant: "success",
-          });
-          navigate("/");
+      axios.put(`${SERVER_URL}/books/${id}`, data).then((res) => {
+        enqueueSnackbar("Successfully created book!", {
+          variant: "success",
         });
+        navigate("/");
+      });
     }catch(err){
          enqueueSnackbar("Unable to fetch API", {
            variant: "error",

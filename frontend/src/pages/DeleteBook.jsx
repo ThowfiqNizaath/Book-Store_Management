@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Backbutton from '../components/Backbutton'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useSnackbar } from 'notistack'
+import { appContext } from '../Context/context'
 
 const DeleteBook = () => {
   const {id} = useParams()
   const navigate = useNavigate()
   const {enqueueSnackbar} = useSnackbar()
+  const {SERVER_URL} = useContext(appContext)
   const handleDeletBook = async() => {
      axios
-       .delete(`https://book-store-management-zig8.vercel.app/books/${id}`)
+       .delete(`${SERVER_URL}/books/${id}`)
        .then((res) => {
          enqueueSnackbar("Successfully Deleted!", {
            variant: "success",

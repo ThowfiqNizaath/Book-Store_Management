@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Backbutton from "../components/Backbutton";
 import Spinner from "../components/Spinner";
+import { appContext } from "../Context/context";
 const ShowBook = () => {
   const [book, setBook] = useState({});
   const [loading ,setLoading] = useState(false);
   const { id } = useParams();
+  const {SERVER_URL} = useContext(appContext)
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`https://book-store-management-zig8.vercel.app/books/${id}`)
-      .then((res) => {
-        setBook(res.data.book);
-        setLoading(false);
-      });
+    axios.get(`${SERVER_URL}/books/${id}`).then((res) => {
+      setBook(res.data.book);
+      setLoading(false);
+    });
   }, []);
   return (
     <div className="px-4 py-2 sm:p-2">

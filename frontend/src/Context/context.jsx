@@ -4,19 +4,18 @@ import { createContext } from "react";
 export const appContext = createContext()
 
 const ContextProvider = ({children}) => {
+    const SERVER_URL = import.meta.env.VITE_SERVER_URL;
     const [view, setView] = useState('table')
-
     const toggleView = () => {
         setView(preView => (
             preView === 'table' ? 'card' : 'table'
         ))
     }
-
-    return(
-        <appContext.Provider value={{view, toggleView}}>
-            {children}
-        </appContext.Provider>
-    )
+    return (
+      <appContext.Provider value={{ view, toggleView, SERVER_URL}}>
+        {children}
+      </appContext.Provider>
+    );
 }
 
 export default ContextProvider
