@@ -5,7 +5,7 @@ import ShowBook from "./pages/ShowBook";
 import EditBook from "./pages/EditBook";
 import DeleteBook from "./pages/DeleteBook";
 import { Route, Routes } from "react-router-dom";
-import ContextProvider from "./Context/context";
+import NotFound from "./components/NotFound";
 const App = () => {
   return (
     // <ContextProvider>
@@ -15,6 +15,7 @@ const App = () => {
         <Route path="/books/details/:id" element={<ShowBook />} />
         <Route path="/books/edit/:id" element={<EditBook />} />
         <Route path="/books/delete/:id" element={<DeleteBook />} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     // </ContextProvider>
   );
