@@ -4,7 +4,7 @@ import { createContext } from "react";
 export const appContext = createContext()
 
 const ContextProvider = ({children}) => {
-    const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+    const SERVER_URL = 'https://book-store-management-server.onrender.com/';
     const [view, setView] = useState('table')
     const toggleView = () => {
         setView(preView => (
