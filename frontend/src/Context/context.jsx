@@ -6,10 +6,8 @@ export const appContext = createContext()
 const ContextProvider = ({children}) => {
     const SERVER_URL = 'https://book-store-management-server.onrender.com';
     const [view, setView] = useState('table')
-    const toggleView = () => {
-        setView(preView => (
-            preView === 'table' ? 'card' : 'table'
-        ))
+    const toggleView = (view) => {
+        setView(view)
     }
     return (
       <appContext.Provider value={{ view, toggleView, SERVER_URL}}>
