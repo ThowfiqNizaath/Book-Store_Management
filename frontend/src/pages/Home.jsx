@@ -50,11 +50,10 @@ const Home = () => {
           <MdOutlineAddBox className="text-sky-800 text-4xl" />
         </Link>
       </div>
-      {loading && <Spinner />}
       {view === "table" ? (
-        <TableView books={books} />
+        <TableView books={books} loading={loading}/>
       ) : (
-        <CardView books={books} />
+        <CardView books={books} loading={loading} />
       )}
     </div>
   );
