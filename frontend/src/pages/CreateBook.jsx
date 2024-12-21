@@ -25,6 +25,7 @@ const CreateBook = () => {
       })
       navigate('/')
      }catch(err){
+      console.log(err)
        enqueueSnackbar("Please provide all details", {
          variant: "error",
        });
