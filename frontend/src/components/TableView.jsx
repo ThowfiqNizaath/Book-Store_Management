@@ -8,7 +8,8 @@ import Spinner from "./Spinner";
 const TableView = ({ books ,loading }) => {
   return loading ? (
     <Spinner />
-  ) : (
+  ) : books.length > 0 ?
+  (
     <table className="w-full border-separate border-spacing-2">
       <thead>
         <tr>
@@ -24,8 +25,8 @@ const TableView = ({ books ,loading }) => {
         </tr>
       </thead>
       <tbody>
-        {books
-          ? books.map((book, index) => (
+        {
+        books.map((book, index) => (
               <tr key={book._id} className="h-8">
                 <td className="border border-slate-700 rounded-md text-center">
                   {index + 1}
@@ -54,10 +55,15 @@ const TableView = ({ books ,loading }) => {
                 </td>
               </tr>
             ))
-          : ""}
+      }
       </tbody>
     </table>
-  );
+  ): (
+    <div className="col-span-2 font-medium text-gray-500 text-2xl">
+      Books are not Available.
+      <Link to="/books/create" className="text-blue-600 mx-2 hover:underline hover:text-blue-700">Do you want to add?</Link>
+      </div>
+    )
 };
 
 export default TableView;
